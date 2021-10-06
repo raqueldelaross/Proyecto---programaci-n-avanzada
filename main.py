@@ -1,111 +1,135 @@
-# Programa principal del proyecto
-import requests
 import os
-import random
-from pokemon import Pokemon
+from random import randint #librearia para generar numeros aleatorios
+clear = lambda: os.system('cls') #limpiar pantalla
 
-id = 1
-
-while 0:
-    print("Bienvenido a Pokemón! Estas listo para comenzar?")
-    print("Selecciona tu primer pokemón")
-    print("1. Bulbasaur")
-    print("2. Charmander")
-    print("3. Squirtle")
-    select = int(input())
-
-# Bulbasaur
-    if (select == 1):
-        pokemons = requests.get(f"https://pokeapi.co/api/v2/pokemon/1/")
-        pokemon = pokemons.json()
-        nombre = "Bulbasaur"
-        altura = pokemon['height']
-        peso = pokemon['weight']
+def inicial(poke_incial):
         nivel = 5
-        tipo = pokemon['types']
-        habilidades = pokemon['abilities']
-        movimientos = []
-        max = pokemon['moves'].len()
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        max = pokemon['stats'][0]['base_stat']
-        hp = random.randint(0, max)
-        max = pokemon['stats'][1]['base_stat']
-        attack = random.randint(0, max)
-        #repetir para stats 2 - 5
-        max = pokemon['stats'][2]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][3]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][4]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][5]['base_stat']
-        attack = random.randint(0, max)
-        apodo = input("Que apodo le quiere dar al pokemon? ")
-        pokemon = Pokemon(nombre, altura, peso, nivel, tipo, habilidades, movimientos, hp, attack)
+        if poke_inicial == 1:
+            #DATOS
+            EB = 45
+            ataque = 49
+            defensa = 49
+            a_especial = 65 #valor ataque especial
+            d_especial = 65 #valor defensa especial
+            vel = 45
+            #puntos de salud
+            vi = randint(1, 45)
+            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
+            #puntos de ataque
+            vi2 = randint(1, 45)
+            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
+            #puntos de defensa
+            vi3 = randint(1, 45)
+            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
+            #puntos de ataque especial
+            vi4 = randint(1, 45)
+            atq_especial = ((vi4 + 2 * ataque)*(nivel/100))+5
+            #puntos de defensa especial
+            vi5 = randint(1, 45)
+            def_especial = ((vi5 + 2 * defensa)*(nivel/100))+5
+            #velocidad
+            vi6 = randint(1, 45)
+            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
+            
 
-# Charmander
-if (select == 2):
-        pokemons = requests.get(f"https://pokeapi.co/api/v2/pokemon/4/")
-        pokemon = pokemons.json()
-        nombre = "Charmander"
-        altura = pokemon['height']
-        peso = pokemon['weight']
-        nivel = 5
-        tipo = pokemon['types']
-        habilidades = pokemon['abilities']
-        movimientos = []
-        max = pokemon['moves'].len()
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        max = pokemon['stats'][0]['base_stat']
-        hp = random.randint(0, max)
-        max = pokemon['stats'][1]['base_stat']
-        attack = random.randint(0, max)
-        #repetir para stats 2 - 5
-        max = pokemon['stats'][2]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][3]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][4]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][5]['base_stat']
-        attack = random.randint(0, max)
-        apodo = input("Que apodo le quiere dar al pokemon? ")
-        pokemon = Pokemon(nombre, altura, peso, nivel, tipo, habilidades, movimientos, hp, attack)
+            print('Su pokemon es: BULBASAUR')
+            apodo = input('Ingrese apodo: ')
+            print(f"Nivel-----------: {nivel} ")
+            print('Movimientos-----: ')
+            print('<< Datos de combate >>')
+            print(f"Puntos de salud-: {ps} ")
+            print(f"Ataque----------: {atq}")
+            print(f"Defensa---------: {defe}")
+            print(f"Ataque especial-: {atq_especial}")
+            print(f"Defensa especial: {def_especial}")
+            print(f"Velocidad-------: {velocidad}")
 
-# Squirtle
-if (select == 3):
-        pokemons = requests.get(f"https://pokeapi.co/api/v2/pokemon/7/")
-        pokemon = pokemons.json()
-        nombre = "Squirtle"
-        altura = pokemon['height']
-        peso = pokemon['weight']
-        nivel = 5
-        tipo = pokemon['types']
-        habilidades = pokemon['abilities']
-        movimientos = []
-        max = pokemon['moves'].len()
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        mov  = random.randint(0,max-1)
-        movimientos.append(pokemon['moves'][mov])
-        max = pokemon['stats'][0]['base_stat']
-        hp = random.randint(0, max)
-        max = pokemon['stats'][1]['base_stat']
-        attack = random.randint(0, max)
-        #repetir para stats 2 - 5
-        max = pokemon['stats'][2]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][3]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][4]['base_stat']
-        attack = random.randint(0, max)
-        max = pokemon['stats'][5]['base_stat']
-        attack = random.randint(0, max)
-        apodo = input("Que apodo le quiere dar al pokemon? ")
-        pokemon = Pokemon(nombre, altura, peso, nivel, tipo, habilidades, movimientos, hp, attack)
+        if poke_inicial == 2:
+            #DATOS
+            EB = 39
+            ataque = 52
+            defensa = 43
+            a_especial = 60 #valor ataque especial
+            d_especial = 50 #valor defensa especial
+            vel = 65
+            #puntos de salud
+            vi = randint(1, 39)
+            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
+            #puntos de ataque
+            vi2 = randint(1, 39)
+            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
+            #puntos de defensa
+            vi3 = randint(1, 39)
+            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
+            #puntos de ataque especial
+            vi4 = randint(1, 39)
+            atq_especial = ((vi4 + 2 * a_especial)*(nivel/100))+5
+            #puntos de defensa especial
+            vi5 = randint(1, 39)
+            def_especial = ((vi5 + 2 * d_especial)*(nivel/100))+5
+            #velocidad
+            vi6 = randint(1, 39)
+            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
+            
+
+            print('Su pokemon es: CHARMANDER')
+            apodo = input('Ingrese apodo: ')
+            print(f"Nivel-----------: {nivel} ")
+            print('Movimientos-----: ')
+            print('<< Datos de combate >>')
+            print(f"Puntos de salud-: {ps} ")
+            print(f"Ataque----------: {atq}")
+            print(f"Defensa---------: {defe}")
+            print(f"Ataque especial-: {atq_especial}")
+            print(f"Defensa especial: {def_especial}")
+            print(f"Velocidad-------: {velocidad}")
+
+        if poke_inicial == 3:
+            #DATOS
+            EB = 44
+            ataque = 48
+            defensa = 65
+            a_especial = 50 #ataque especial
+            d_especial = 64 #defensa especial
+            vel = 43
+            #puntos de salud
+            vi = randint(1, 44) #valor individual aleatorio
+            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
+            #puntos de ataque
+            vi2 = randint(1, 44)
+            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
+            #puntos de defensa
+            vi3 = randint(1, 44)
+            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
+            #puntos de ataque especial
+            vi4 = randint(1, 44)
+            atq_especial = ((vi4 + 2 * a_especial)*(nivel/100))+5
+            #puntos de defensa especial
+            vi5 = randint(1, 44)
+            def_especial = ((vi5 + 2 * d_especial)*(nivel/100))+5
+            #velocidad
+            vi6 = randint(1, 44)
+            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
+            
+
+            print('Su pokemon es: SQUIRTLE')
+            apodo = input('Ingrese apodo: ')
+            print(f"Nivel-----------: {nivel} ")
+            print('Movimientos-----: ')
+            print('<< Datos de combate >> ')
+            print(f"Puntos de salud-: {ps} ")
+            print(f"Ataque----------: {atq}")
+            print(f"Defensa---------: {defe}")
+            print(f"Ataque especial-: {atq_especial}")
+            print(f"Defensa especial: {def_especial}")
+            print(f"Velocidad-------: {velocidad}")
+
+#Bloque principal:
+print(' BIENVENIDO A POKEMON ROJO. ')
+print('INICIO DE JUEGO... ')
+print('Pokemon Inicial Disponibles: ')
+print('1 - BULBASAUR. \n2 - CHARMANDER. \n3 - SQUIRTLE.')
+poke_inicial = int(input('Seleccione un pokemon inicial: '))
+
+clear()
+print(inicial(poke_inicial))
