@@ -1,135 +1,28 @@
 import os
-from random import randint #librearia para generar numeros aleatorios
-clear = lambda: os.system('cls') #limpiar pantalla
+from pokeinicial import pokeinicial
 
-def inicial(poke_incial):
-        nivel = 5
-        if poke_inicial == 1:
-            #DATOS
-            EB = 45
-            ataque = 49
-            defensa = 49
-            a_especial = 65 #valor ataque especial
-            d_especial = 65 #valor defensa especial
-            vel = 45
-            #puntos de salud
-            vi = randint(1, 45)
-            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
-            #puntos de ataque
-            vi2 = randint(1, 45)
-            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa
-            vi3 = randint(1, 45)
-            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
-            #puntos de ataque especial
-            vi4 = randint(1, 45)
-            atq_especial = ((vi4 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa especial
-            vi5 = randint(1, 45)
-            def_especial = ((vi5 + 2 * defensa)*(nivel/100))+5
-            #velocidad
-            vi6 = randint(1, 45)
-            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
-            
+clear = lambda: os.system('cls')
+# mostrar menú
 
-            print('Su pokemon es: BULBASAUR')
-            apodo = input('Ingrese apodo: ')
-            print(f"Nivel-----------: {nivel} ")
-            print('Movimientos-----: ')
-            print('<< Datos de combate >>')
-            print(f"Puntos de salud-: {ps} ")
-            print(f"Ataque----------: {atq}")
-            print(f"Defensa---------: {defe}")
-            print(f"Ataque especial-: {atq_especial}")
-            print(f"Defensa especial: {def_especial}")
-            print(f"Velocidad-------: {velocidad}")
+print('Bienvenido al juego de Pokémon')
+print('------------------------------')
+print('1. Equipo pokémon')
+print('2. Batallas contra pokémon salvajes')
+print('3. Pokédex')
+print('4. Tienda')
+print('5. Salir del videojuego')
+# seleccionar una opción del menú 
+opcion = int(input('Seleccione una opción para continuar: '))
 
-        if poke_inicial == 2:
-            #DATOS
-            EB = 39
-            ataque = 52
-            defensa = 43
-            a_especial = 60 #valor ataque especial
-            d_especial = 50 #valor defensa especial
-            vel = 65
-            #puntos de salud
-            vi = randint(1, 39)
-            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
-            #puntos de ataque
-            vi2 = randint(1, 39)
-            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa
-            vi3 = randint(1, 39)
-            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
-            #puntos de ataque especial
-            vi4 = randint(1, 39)
-            atq_especial = ((vi4 + 2 * a_especial)*(nivel/100))+5
-            #puntos de defensa especial
-            vi5 = randint(1, 39)
-            def_especial = ((vi5 + 2 * d_especial)*(nivel/100))+5
-            #velocidad
-            vi6 = randint(1, 39)
-            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
-            
-
-            print('Su pokemon es: CHARMANDER')
-            apodo = input('Ingrese apodo: ')
-            print(f"Nivel-----------: {nivel} ")
-            print('Movimientos-----: ')
-            print('<< Datos de combate >>')
-            print(f"Puntos de salud-: {ps} ")
-            print(f"Ataque----------: {atq}")
-            print(f"Defensa---------: {defe}")
-            print(f"Ataque especial-: {atq_especial}")
-            print(f"Defensa especial: {def_especial}")
-            print(f"Velocidad-------: {velocidad}")
-
-        if poke_inicial == 3:
-            #DATOS
-            EB = 44
-            ataque = 48
-            defensa = 65
-            a_especial = 50 #ataque especial
-            d_especial = 64 #defensa especial
-            vel = 43
-            #puntos de salud
-            vi = randint(1, 44) #valor individual aleatorio
-            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
-            #puntos de ataque
-            vi2 = randint(1, 44)
-            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa
-            vi3 = randint(1, 44)
-            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
-            #puntos de ataque especial
-            vi4 = randint(1, 44)
-            atq_especial = ((vi4 + 2 * a_especial)*(nivel/100))+5
-            #puntos de defensa especial
-            vi5 = randint(1, 44)
-            def_especial = ((vi5 + 2 * d_especial)*(nivel/100))+5
-            #velocidad
-            vi6 = randint(1, 44)
-            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
-            
-
-            print('Su pokemon es: SQUIRTLE')
-            apodo = input('Ingrese apodo: ')
-            print(f"Nivel-----------: {nivel} ")
-            print('Movimientos-----: ')
-            print('<< Datos de combate >> ')
-            print(f"Puntos de salud-: {ps} ")
-            print(f"Ataque----------: {atq}")
-            print(f"Defensa---------: {defe}")
-            print(f"Ataque especial-: {atq_especial}")
-            print(f"Defensa especial: {def_especial}")
-            print(f"Velocidad-------: {velocidad}")
-
-#Bloque principal:
-print(' BIENVENIDO A POKEMON ROJO. ')
-print('INICIO DE JUEGO... ')
-print('Pokemon Inicial Disponibles: ')
-print('1 - BULBASAUR. \n2 - CHARMANDER. \n3 - SQUIRTLE.')
-poke_inicial = int(input('Seleccione un pokemon inicial: '))
-
-clear()
-print(inicial(poke_inicial))
+if opcion == 1:
+    clear()
+elif opcion == 2: 
+    clear()
+elif opcion == 3:
+    clear()
+elif opcion == 4:
+    clear()
+elif opcion == 5:
+    clear()
+else:
+    clear()
