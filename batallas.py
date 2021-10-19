@@ -1,5 +1,5 @@
-from random import randint
-from random import choice
+from random import choice, randint
+import requests
 
 class Batallas:
     def __init__(self, seleccion):
@@ -7,35 +7,37 @@ class Batallas:
 
     def pokemon_salvaje(self, nivelpokeusuario):
         nivel = randint(nivelpokeusuario - 5, nivelpokeusuario + 5)
-        # pokemones = consultar API para eleccion del pokemon
-        pokemon = choice(pokemones)
+        opcion = randint(1, 1118)
+        pokemones = requests.get(f"https://pokeapi.co/api/v2/pokemon/{opcion}/")
+        pokemon = pokemones.json()
         vi = randint(1, 20)
-            #EB = sacar de informacion de la api
-            #ataque = sacar de informacion de la api
-            #defensa = sacar de informacion de la api
-            #vel = sacar de informacion de la api
-            ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
-            #puntos de ataque
-            vi2 = randint(1, 20)
-            atq = ((vi2 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa
-            vi3 = randint(1, 20)
-            defe = ((vi3 + 2 * defensa)*(nivel/100))+5
-            #puntos de ataque especial
-            vi4 = randint(1, 20)
-            atq_especial = ((vi4 + 2 * ataque)*(nivel/100))+5
-            #puntos de defensa especial
-            vi5 = randint(1, 20)
-            def_especial = ((vi5 + 2 * defensa)*(nivel/100))+5
-            #velocidad
-            vi6 = randint(1, 20)
-            velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
-            movimientos = #sacar de la api
-            movimiento1 = choice(movimientos)
-            movimiento2 = choice(movimientos)
-            movimiento3 = choice(movimientos)
-            movimiento4 = choice(movimientos)
-        self.pokesalvaje = ['nombre': pokemon.nombre; 'nivel': nivel;] #guardar especificaciones a una variable local para consultar durante batalla
+        EB = pokemon['stats'][0]['base_stat']
+        ataque = pokemon['stats'][1]['base_stat']
+        defensa = pokemon['stats'][2]['base_stat']
+        vel = pokemon['stats'][5]['base_stat']
+        ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
+        #puntos de ataque
+        vi2 = randint(1, 20)
+        atq = ((vi2 + 2 * ataque)*(nivel/100))+5
+        #puntos de defensa
+        vi3 = randint(1, 20)
+        defe = ((vi3 + 2 * defensa)*(nivel/100))+5
+        #puntos de ataque especial
+        vi4 = randint(1, 20)
+        atq_especial = ((vi4 + 2 * ataque)*(nivel/100))+5
+        #puntos de defensa especial
+        vi5 = randint(1, 20)
+        def_especial = ((vi5 + 2 * defensa)*(nivel/100))+5
+        #velocidad
+        vi6 = randint(1, 20)
+        velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
+        movimientos = pokemon['moves']
+        movimiento1 = choice(movimientos)
+        movimiento2 = choice(movimientos)
+        movimiento3 = choice(movimientos)
+        movimiento4 = choice(movimientos)
+        self.pokesalvaje = {'nombre': pokemon['name'], 'nivel': nivel, 'tipo': pokemon['types'], 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial, 'Defensa especial': def_especial, 'Velociadad': velocidad} 
+        #guardar especificaciones a una variable local para consultar durante batalla
 
     def atacar():
         pass
