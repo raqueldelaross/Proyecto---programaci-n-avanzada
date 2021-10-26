@@ -1,4 +1,5 @@
 from random import choice, randint
+from tienda import Tienda
 import requests
 
 class Batallas:
@@ -46,7 +47,47 @@ class Batallas:
         pass
 
     def curar():
-        pass
+        print('Utilizar un objeto curativo')
+        print('OBJETOS CURATIVOS:')
+        print(f"1. Posión:       {posion}")
+        print(f"2. Super-posión: {superposion}")
+        print(f"3. Hiper-posión: {hiperposion}")
+        print(f"4. Restauración: {restaurar}")
+        objeto = int(input('Ingrese la opción del objeto curativo que desee usar: '))
+        if objeto == 1:
+            if posion > 0:
+                vida = vida  + 20
+                print('Se ha sumado 20 puntos de vida a su pokémon')
+            else:
+                print('Error, no tiene el objeto curativo seleccionado')
+                os.system("pause")  
+                continue
+        elif objeto == 2:
+            if superposion > 0:
+                vida = vida  + 50
+                print('Se ha sumado 50 puntos de vida a su pokémon')
+            else:   
+                print('Error, no tiene el objeto curativo seleccionado')
+                os.system("pause")  
+                continue
+        elif objeto == 3:
+            if hiperposion > 0:
+                vida = vida  + 200
+                print('Se ha sumado 200 puntos de vida a su pokémon')
+            else:   
+                print('Error, no tiene el objeto curativo seleccionado')
+                os.system("pause")  
+                continue
+        elif objeto == 4:
+            if restaurar > 0:
+                vida = 3000
+                print('Se ha restaurado la vida de su pokémon a 300 puntos de vida')
+            else:       
+                print('Error, no tiene el objeto curativo seleccionado')
+                os.system("pause")  
+                continue
+        else:
+            print('ERROR')
 
     def huir():
         pass
