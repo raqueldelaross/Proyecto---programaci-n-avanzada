@@ -1,4 +1,5 @@
 from random import choice, randint
+from seleccion_pokemon import Seleccion_pokemon
 from tienda import Tienda
 import requests
 

@@ -6,6 +6,7 @@ from pokedex import Pokedex
 from tienda import Tienda
 
 clear = lambda: os.system('cls')
+tienda = Tienda()
 
 # Bloque principal:
 print('\nBIENVENIDO A POKEMON ROJO. ')
@@ -57,15 +58,6 @@ while True:
         # De lo contrario no los mostrara
         Pokedex('link1, link2...... link5')
     elif opcion == 4:
-        posion = 0
-        superposion = 0
-        hiperposion = 0
-        restaurar = 0
-        monedas = 2000
-        pokeball = 0
-        superpokeball = 0
-        ultraball = 0
-        masterball = 0
         clear()
         # menu
         print('Bienvenido a la tienda')
@@ -83,38 +75,9 @@ while True:
             print('4. Restaurar      (vida completa)      3000')
             compra1 = int(input('Ingrese el número de opción del objeto que desea comprar: '))
             cantidad = int(input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
-            if compra1 == 1:
-                clear()
-                if cantidad * 300 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    posion = posion + cantidad
-                    monedas = monedas - (cantidad * 300)
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 2:
-                clear()
-                if cantidad * 700 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    monedas = monedas -(cantidad * 700)
-                    superposion = superposion + cantidad
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 3:
-                clear()
-                if cantidad * 1200 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    monedas = monedas - (cantidad * 1200)
-                    hiperposion = hiperposion + cantidad
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 4:
-                clear()
-                if cantidad * 3000 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    restaurar = restaurar + cantidad
-                    monedas = monedas - (cantidad * 3000)
-                    print('Los objetos han sido comprados correctamente')
+            tienda.objetos_curativos(compra1, cantidad)
+            os.system('pause')
+
         elif opcion == 2:
             clear()
             print('POKÉ-BALLS')
@@ -125,56 +88,17 @@ while True:
             print('4. Master-ball            255            100000')
             compra1 = int(input('Ingrese el número de opción de la pokéball que desea comprar: '))
             cantidad = int(input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
-            if compra1 == 1:
-                clear()
-                if cantidad * 200 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    pokeball = pokeball + cantidad
-                    monedas = monedas - (cantidad * 200)
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 2:
-                clear()
-                if cantidad * 600 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    superpokeball = superpokeball + superpokeball
-                    monedas = monedas - (cantidad * 600)
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 3:
-                clear()
-                if cantidad * 1200 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    ultraball = ultraball + cantidad
-                    monedas = monedas - (cantidad * 1200)
-                    print('Los objetos han sido comprados correctamente')
-            if compra1 == 4:
-                clear()
-                if cantidad * 100000 > monedas:
-                    print('Cantidad de monedas insuficientes')
-                else:
-                    masterball = masterball + cantidad
-                    monedas = monedas - (cantidad * 1200)
-                    print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
+            tienda.poke(compra1, cantidad)
+            os.system('pause')
+
         elif opcion == 3:
             clear()
-            print('INVENTARIO DE OBJETOS CURATIVOS Y POKEBALLS')
-            print('OBJETOS CURATIVOS:')
-            print(f"Posión:       {posion}")
-            print(f"Super-posión: {superposion}")
-            print(f"Hiper-posión: {hiperposion}")
-            print(f"Restauración: {restaurar}")
-            print('\nPOKEBALLS:')
-            print(f"Pokeball:     {pokeball}")
-            print(f"Super-ball:   {superpokeball}")
-            print(f"Ultra-ball:   {ultraball}")
-            print(f"Master-ball:  {masterball}")
+            tienda.__str__()
+            os.system('pause')
         else:
             print('ERROR')
             print('ingrese una opción válida')
-            os.system("pause")       
+            os.system("pause")
     elif opcion == 5:
         clear()
         # Mostrar creditos
