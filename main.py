@@ -91,7 +91,6 @@ while True:
                     posion = posion + cantidad
                     monedas = monedas - (cantidad * 300)
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 2:
                 clear()
                 if cantidad * 700 > monedas:
@@ -100,7 +99,6 @@ while True:
                     monedas = monedas -(cantidad * 700)
                     superposion = superposion + cantidad
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 3:
                 clear()
                 if cantidad * 1200 > monedas:
@@ -109,7 +107,6 @@ while True:
                     monedas = monedas - (cantidad * 1200)
                     hiperposion = hiperposion + cantidad
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 4:
                 clear()
                 if cantidad * 3000 > monedas:
@@ -118,7 +115,6 @@ while True:
                     restaurar = restaurar + cantidad
                     monedas = monedas - (cantidad * 3000)
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
         elif opcion == 2:
             clear()
             print('POKÉ-BALLS')
@@ -137,7 +133,6 @@ while True:
                     pokeball = pokeball + cantidad
                     monedas = monedas - (cantidad * 200)
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 2:
                 clear()
                 if cantidad * 600 > monedas:
@@ -146,7 +141,6 @@ while True:
                     superpokeball = superpokeball + superpokeball
                     monedas = monedas - (cantidad * 600)
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 3:
                 clear()
                 if cantidad * 1200 > monedas:
@@ -155,7 +149,6 @@ while True:
                     ultraball = ultraball + cantidad
                     monedas = monedas - (cantidad * 1200)
                     print('Los objetos han sido comprados correctamente')
-                    print(f"Su cantidad de monedas actual es de: {monedas}")
             if compra1 == 4:
                 clear()
                 if cantidad * 100000 > monedas:
