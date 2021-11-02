@@ -3,6 +3,9 @@ from seleccion_pokemon import Seleccion_pokemon
 from tienda import Tienda
 import requests
 
+poke = Seleccion_pokemon()
+tienda = Tienda()
+
 class Batallas:
     def __init__(self, seleccion):
         self.seleccion = seleccion
@@ -40,11 +43,58 @@ class Batallas:
         movimiento4 = choice(movimientos)
         self.pokesalvaje = {'nombre': pokemon['name'], 'nivel': nivel, 'tipo': pokemon['types'], 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial, 'Defensa especial': def_especial, 'Velociadad': velocidad} 
         #guardar especificaciones a una variable local para consultar durante batalla
+        return self.pokesalvaje
 
-    def atacar():
-        pass
+    def atacar(self, nivel):
+        # tipo = requests.get(f"https://pokeapi.co/api/v2/pokemon/{}/")
+        v = randint(85, 100)
+        daño = 0.01 * 1.5 * 2 * v * ((((0.2 * nivel + 1)* cantidad * potencia)/ (25 * self.pokemon_salvaje['Defensa'])) + 2)
+        
+        # Pokemon pierde
+        if poke.inicial().vi <= 0:
+            print('Game Over')
+            print('You lost')
+
+        # Pokemon gana
+        elif self.pokemon_salvaje['Salud'] <= daño:
+            print('You Win')
+            # Experiencia
+            experiencia = (self.pokemon_salvaje['exp'] * self.pokemon_salvaje['nivel']) / 7 
+            print(f"Usted a adquirido {experiencia} exp")
+            subir = 0.8 * (poke.inicial().nivel * poke.inicial().nivel * poke.inicial().nivel)
+            if subir == experiencia:
+                experiencia = 0
+                poke.inicial().nivel += 1
+                # Movimiento nuevo
+                if (poke.inicial().nivel - 4) == 5:
+                    while True:
+                        cambio = input('\nDesea cambiar de movimiento?(s/n) ')
+                        if cambio == 's':
+                            print('Movimiento aprendido')
+                        elif cambio == 'n':
+                            print('Movimiento no aprendido')
+                            break
+                        else:
+                            print('Ingrese opcion valida')
+
+            else:
+                poke.inicial().exp += experiencia
+
+            # Bonificacion monetaria
+            if self.pokemon_salvaje['nivel'] <= 10:
+                tienda.monedas += 200
+            elif self.pokemon_salvaje['nivel'] <= 10:
+                tienda.monedas += 500
+            elif self.pokemon_salvaje['nivel'] <= 10:
+                tienda.monedas += 1000
+            elif self.pokemon_salvaje['nivel'] <= 10:
+                tienda.monedas += 2000
+            elif self.pokemon_salvaje['nivel'] <= 10:
+                tienda.monedas += 10000
+
 
     def capturar():
+        # NOTA: CAPTURAR DEBE RETORNAR UN BOOLEANO (TRUE SI LO CAPTURO, FLASE SI NO)
         pass
 
     def curar():
