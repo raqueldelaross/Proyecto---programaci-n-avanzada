@@ -1,19 +1,28 @@
 from random import randint
 from random import choice
+import requests
+
 
 class Seleccion_pokemon:
     def __init__(self, pokemon):
         self.pokemon = pokemon
+        self.pokeinicial = {}
+    
+
 
     def inicial(self):
         nivel = 5
         if self.pokemon == 1:
+            nombre = "Bulbasaur"
             #puntos de salud
             vi = randint(1, 20)
-            EB = 45
-            ataque = 49
-            defensa = 49
-            vel = 45
+            pokemones = requests.get(f"https://pokeapi.co/api/v2/pokemon/1/")
+            pokemon = pokemones.json()
+            vi = randint(1, 20)
+            EB = pokemon['stats'][0]['base_stat']
+            ataque = pokemon['stats'][1]['base_stat']
+            defensa = pokemon['stats'][2]['base_stat']
+            vel = pokemon['stats'][5]['base_stat']
             ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
             #puntos de ataque
             vi2 = randint(1, 20)
@@ -31,9 +40,12 @@ class Seleccion_pokemon:
             vi6 = randint(1, 20)
             velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
             # movimientos de BULBASAUR
-            movimientos_bulbasaur = ['Scratch', 'Growl', 'Leech seed', 'Vine whip', 'Posion powder', 'Sleep powder', 'Take down', 'Razor leaf', 'Sweet scent', 'Growth', 'Double-edge', 'Worry seed', 'Synthesis', 'Seed Bomb']
+            movimientos_bulbasaur = pokemon['moves']
             movimiento1 = choice(movimientos_bulbasaur)
+            movimiento1 = movimiento1['move']['name']
             movimiento2 = choice(movimientos_bulbasaur)
+            movimiento2 = movimiento2['move']['name']
+            tipos = pokemon['types']  
 
             print('Su pokemon es: BULBASAUR')
             apodo = input('Ingrese apodo: ')
@@ -49,12 +61,16 @@ class Seleccion_pokemon:
             input('Presione cualquier tecla para continuar...')
 
         elif self.pokemon == 2:
+            nombre = "Charmander"
             #puntos de salud
             vi = randint(1, 20)
-            EB = 39
-            ataque = 52
-            defensa = 43
-            vel = 65
+            pokemones = requests.get(f"https://pokeapi.co/api/v2/pokemon/4/")
+            pokemon = pokemones.json()
+            vi = randint(1, 20)
+            EB = pokemon['stats'][0]['base_stat']
+            ataque = pokemon['stats'][1]['base_stat']
+            defensa = pokemon['stats'][2]['base_stat']
+            vel = pokemon['stats'][5]['base_stat']
             ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
             #puntos de ataque
             vi2 = randint(1, 20)
@@ -72,9 +88,12 @@ class Seleccion_pokemon:
             vi6 = randint(1, 20)
             velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
             # movimientos de CHARMANDER
-            movimientos_charmander = ['Scratch', 'Growl', 'Ember', 'Smokescreen', 'Dragon rage', 'Scary face', 'Fire fang', 'Flame brust', 'Slash', 'Flamethrower', 'Fire spin', 'Inferno']
+            movimientos_charmander = pokemon['moves']
             movimiento1 = choice(movimientos_charmander)
+            movimiento1 = movimiento1['move']['name']
             movimiento2 = choice(movimientos_charmander)
+            movimiento2 = movimiento2['move']['name']
+            tipos = pokemon['types']  
 
             print('Su pokemon es: CHARMANDER')
             apodo = input('Ingrese apodo: ')
@@ -90,12 +109,16 @@ class Seleccion_pokemon:
             input('Presione cualquier tecla para continuar...')
 
         elif self.pokemon == 3:
+            nombre = "Squirtle"
             #puntos de salud
             vi = randint(1, 20)
-            EB = 44
-            ataque = 48
-            defensa = 65
-            vel = 43
+            pokemones = requests.get(f"https://pokeapi.co/api/v2/pokemon/7/")
+            pokemon = pokemones.json()
+            vi = randint(1, 20)
+            EB = pokemon['stats'][0]['base_stat']
+            ataque = pokemon['stats'][1]['base_stat']
+            defensa = pokemon['stats'][2]['base_stat']
+            vel = pokemon['stats'][5]['base_stat']
             ps = ((vi + 2 * EB)* (nivel/100))+10+nivel
             #puntos de ataque
             vi2 = randint(1, 20)
@@ -113,9 +136,12 @@ class Seleccion_pokemon:
             vi6 = randint(1, 20)
             velocidad = ((vi6 + 2 * vel)*(nivel/100))+5
             # movimientos de SQUIRTLE
-            movimientos_squirtle = ['Trackle', 'Tail whip', 'Water Gun', 'Whitdraw', 'Bubble', 'Bite', 'Rapid spin', 'Protect', 'Water pulse', 'Aqua tail', 'Skull bash', 'Iron defense', 'Rain dance', 'Hydro pump']
+            movimientos_squirtle = pokemon['moves']
             movimiento1 = choice(movimientos_squirtle)
-            movimiento2 = choice(movimientos_squirtle)            
+            movimiento1 = movimiento1['move']['name']
+            movimiento2 = choice(movimientos_squirtle)
+            movimiento2 = movimiento2['move']['name']  
+            tipos = pokemon['types']          
 
             print('Su pokemon es: SQUIRTLE')
             apodo = input('Ingrese apodo: ')
@@ -132,3 +158,8 @@ class Seleccion_pokemon:
         
         else:
             print('Esta opcion no esta disponible')
+
+        self.pokeinicial = {'nombre': nombre, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial, 'Defensa especial': def_especial, 'Velociadad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]} 
+    
+    def datosinicial(self):
+        return self.pokeinicial
