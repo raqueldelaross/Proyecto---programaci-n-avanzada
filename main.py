@@ -20,7 +20,7 @@ clear()
 # Asigna dentro de una variable la clase Pokemon_inicial 
 seleccion = Seleccion_pokemon(poke_inicial) # <- Se envia la opcion seleccionada
 
-print(seleccion.inicial())
+print(seleccion.datosinicial())
 clear()
 
 while True:
@@ -50,7 +50,8 @@ while True:
         # Al igual que la opción uno seleccionara un pokemon de los que tiene para poder pelear
         # Si el usuario selecciona un pokemon existente que envie este dato a la clase batallas: 
         # Batallas(“Link para el pokemon mencionado”)
-        Batallas('link')
+        pokemon = seleccion.datosinicial()
+        Batallas(pokemon, tienda)
     elif opcion == 3:
         # En la clase Pokedex los atributos serán los links respectivos de cada pokemon  
         # En el método se verificará si los pokemon ya fueron enfrentados 
@@ -105,8 +106,8 @@ while True:
         print('\033[32m'+'GRACIAS POR JUGAR A POKEMON\nGRUPO DE DESARROLLO:\n')
         print('************************************************************************')
         print('* LIDER DEL GRUPO DE DESARROLLADORES: HEIDI RAQUEL DE LA ROSA QUINONEZ *')
-        print('* DESARROLLADOR: YEFRI RICARDO CHAY HERRERA                              *')
         print('* DESARROLLADOR: ANGEL SEBASTIAN PEREIRA FAJARDO                         *')
+        print('* DESARROLLADOR: YEFRI RICARDO CHAY HERRERA                              *')
         print('* DESARROLLADOR: FRANCISCO JAVIER SANCHEZ TASEJ                          *')
         print('************************************************************************')
         input('Presiona cualquier tecla para continuar...')
