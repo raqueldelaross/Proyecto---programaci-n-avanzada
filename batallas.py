@@ -7,10 +7,11 @@ class Batallas:
         self.pokemon_seleccionado = seleccion #pokemon se recibe desde el programa main.py
         self.vida = self.pokemon_seleccionado['Salud']
         self.inventario = inventario
+        self.estado = None
 
     def pokemon_salvaje(self, nivelpokeusuario):
         nivel = randint(nivelpokeusuario - 5, nivelpokeusuario + 5)
-        opcion = randint(1, 1118)
+        opcion = randint(1, 1117)
         pokemones = requests.get(f"https://pokeapi.co/api/v2/pokemon/{opcion}/")
         pokemon = pokemones.json()
         vi = randint(1, 20)
@@ -44,8 +45,17 @@ class Batallas:
         movimiento4 = choice(movimientos)
         movimiento4 = movimiento4['move']['name']
         exp = pokemon['base_experience']
-        self.pokesalvaje = {'nombre': pokemon['name'], 'nivel': nivel, 'tipo': pokemon['types'], 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial, 'Defensa especial': def_especial, 'Velociadad': velocidad, 'experiencia': exp, 'movimientos': [movimiento1, movimiento2,movimiento3,movimiento4]}  
-        #guardar especificaciones a una variable local para consultar durante batalla
+        tipos = []
+        for i in pokemon['types']:
+            tipos.append(
+                {'name': i['type']['name'], 'url': i['type']['url']})
+        speciesdata = requests.get(pokemon['species']['url'])
+        speciesdata = speciesdata.json()
+        self.ratiocaptura = speciesdata['capture_rate']
+        print(f"Razon de Captura {self.ratiocaptura}")
+        self.pokesalvaje = {'nombre': pokemon['name'], 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                            'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': exp, 'movimientos': [movimiento1, movimiento2, movimiento3, movimiento4]}
+        # guardar especificaciones a una variable local para consultar durante batalla
         return self.pokesalvaje
 
     def atacar(self, ataque):
@@ -63,8 +73,9 @@ class Batallas:
 
         # Pokemon pierde
         if self.vida <= 0:
-            print('Game Over')
-            print('You lost')
+            print('Perdiste')
+            self.x = 0
+            self.estado = 0
 
         # Pokemon gana
         elif self.vida > 0:
@@ -124,9 +135,78 @@ class Batallas:
                     self.turno = 'salvaje'
 
 
-    def capturar():
-        # NOTA: CAPTURAR DEBE RETORNAR UN BOOLEANO (TRUE SI LO CAPTURO, FLASE SI NO)
-        pass
+    def capturar(self):
+        if(self.salvajevida > 0):
+            if(self.inventario.pokeball > 0 or self.inventario.superpokeball > 0 or self.inventario.ultraball > 0 or self.inventario.masterball > 0):
+                print('Utilizar una pokebola')
+                print('POKEBOLAS:')
+                print(f"1. Pokeball:       {self.inventario.pokeball}")
+                print(f"2. Superpokeball: {self.inventario.superpokeball}")
+                print(f"3. Ultraball: {self.inventario.ultraball}")
+                print(f"4. Masterball: {self.inventario.masterball}")
+                objeto = int(
+                    input('Ingrese la opción de la pokebola que desee usar: '))
+
+                if(objeto == 1):
+                    if self.inventario.pokeball > 0:
+                        captura = (((3*self.pokemon_salvaje['Salud'])-(
+                            2*self.salvajevida))*self.ratiocaptura*1)/(3*self.pokemon_salvaje['Salud'])
+                        if(captura >= 255):
+                            print("Pokemon Capturado!")
+                            self.estado = 2
+                            self.x = 0
+                        else:
+                            print(
+                                "Fallaste! No se logro capturar el pokemon este turno")
+                            os.system("pause")
+                    else:
+                        print('Error, no tiene el objeto seleccionado')
+                        os.system("pause")
+                if(objeto == 2):
+                    if self.inventario.superpokeball > 0:
+                        captura = (((3*self.pokemon_salvaje['Salud'])-(
+                            2*self.salvajevida))*self.ratiocaptura*1.5)/(3*self.pokemon_salvaje['Salud'])
+                        if(captura >= 255):
+                            print("Pokemon Capturado!")
+                            self.estado = 2
+                            self.x = 0
+                        else:
+                            print(
+                                "Fallaste! No se logro capturar el pokemon este turno")
+                            os.system("pause")
+                    else:
+                        print('Error, no tiene el objeto seleccionado')
+                        os.system("pause")
+                if(objeto == 3):
+                    if self.inventario.ultraball > 0:
+                        captura = (((3*self.pokemon_salvaje['Salud'])-(
+                            2*self.salvajevida))*self.ratiocaptura*2)/(3*self.pokemon_salvaje['Salud'])
+                        if(captura >= 255):
+                            print("Pokemon Capturado!")
+                            self.estado = 2
+                            self.x = 0
+                        else:
+                            print(
+                                "Fallaste! No se logro capturar el pokemon este turno")
+                            os.system("pause")
+                    else:
+                        print('Error, no tiene el objeto seleccionado')
+                        os.system("pause")
+                if(objeto == 4):
+                    if self.inventario.masterball > 0:
+                        captura = (((3*self.pokemon_salvaje['Salud'])-(
+                            2*self.salvajevida))*self.ratiocaptura*255)/(3*self.pokemon_salvaje['Salud'])
+                        if(captura >= 255):
+                            print("Pokemon Capturado!")
+                            self.estado = 2
+                            self.x = 0
+                        else:
+                            print(
+                                "Fallaste! No se logro capturar el pokemon este turno")
+                            os.system("pause")
+                    else:
+                        print('Error, no tiene el objeto seleccionado')
+                        os.system("pause")
 
     def curar(self):
         print('Utilizar un objeto curativo')
@@ -188,18 +268,32 @@ class Batallas:
         pass
 
     def batalla(self):
-        self.salvaje = self.pokemon_salvaje() #generar estadisticas del pokemon salvaje
+        self.salvaje = self.pokemon_salvaje(self.pokemon_seleccionado['nivel']) #generar estadisticas del pokemon salvaje
         self.salvajevida = self.salvaje['Salud']
+        print(self.salvaje)
+        os.system("pause")
         #pokemon del usuario
-        if self.salvaje['Velocidad'] > self.pokemon_seleccionado['Velocidad']: #comparacion de la velocidad para determinar quien va primero
+        if self.salvaje['Velocidad'] > self.pokemon_seleccionado['Velocidad']:
             self.turno = 'salvaje'
         else:
             self.turno = 'jugador'
-        x = 2
-        while x > 0:
+        self.x = 2
+        while self.x > 0:
             if(self.turno == 'jugador'):
-                pass
+                print("turno jugador")
+                break
+            elif(self.turno == 'salvaje'):
+                print("turno salvaje")
+                break
             else:
                 pass
-        pass
+
+        if self.estado == 0:  # perder batalla o huir
+            return(self.pokemon_salvaje, False)
+        elif self.estado == 1:  # ganar batalla
+            # el false indica que no hay captura del pokemon
+            return(self.pokemon_salvaje, False)
+        elif self.estado == 2:
+            # el true indica que si hay captura del pokemon
+            return(self.pokemon_salvaje, True)
 

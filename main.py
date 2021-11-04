@@ -5,23 +5,33 @@ from batallas import Batallas
 from pokedex import Pokedex
 from tienda import Tienda
 
-clear = lambda: os.system('cls')
+def clear(): return os.system('cls')
 tienda = Tienda()
 
 # Bloque principal:
-print('\nBIENVENIDO A POKEMON ROJO. ')
-print('INICIO DE JUEGO... ')
-print('Pokemon Inicial Disponibles: ')
-print('1 - BULBASAUR. \n2 - CHARMANDER. \n3 - SQUIRTLE.')
+clear()
+while(1):
+    print('\nBIENVENIDO A POKEMON ROJO. ')
+    print('INICIO DE JUEGO... ')
+    print('Pokemon Inicial Disponibles: ')
+    print('1 - BULBASAUR. \n2 - CHARMANDER. \n3 - SQUIRTLE.')
+    poke_inicial = 0
+    poke_inicial = int(input('Seleccione un pokemon inicial: '))
+    if(poke_inicial < 1 or poke_inicial > 3):
+        print("Esta no es una opcion valida. Por favor seleccione de nuevo")
+        os.system("pause")
+        clear()
+    else:
+        break
 
-poke_inicial = int(input('Seleccione un pokemon inicial: '))
 clear()
 
 # Asigna dentro de una variable la clase Pokemon_inicial 
-seleccion = Seleccion_pokemon(poke_inicial) # <- Se envia la opcion seleccionada
-
-print(seleccion.datosinicial())
+seleccion = Seleccion_pokemon(poke_inicial)
+primer = seleccion.inicial()
 clear()
+equipo = Equipo(primer)
+print(equipo)
 
 while True:
     # Menú de interacción
@@ -36,22 +46,14 @@ while True:
     opcion = int(input('Seleccione una opción para continuar: '))
 
     if opcion == 1:
-        # Temporal (por modificar)
-        # Mostrar un menú con todos los pokemon existentes en el juego:
-        # “Pokemon existentes:”
-        # “Se menciona en una lista los pokemon”
-        # Ver = “Seleccione pokemon que desea ver: “
-        # Si el pokemon seleccionado fue el pokemon inicial 
-        # o fue capturado durante el juego entonces que envie este dato a equipo: 
-        # ‘Equipo (“Link para el pokemon mencionado”)'
-        # De lo contrario que muestre un mensaje: “Pokémon no desbloqueado”
-        Equipo('link')
+        equipo.progreso()
     elif opcion == 2: 
         # Al igual que la opción uno seleccionara un pokemon de los que tiene para poder pelear
         # Si el usuario selecciona un pokemon existente que envie este dato a la clase batallas: 
         # Batallas(“Link para el pokemon mencionado”)
-        pokemon = seleccion.datosinicial()
-        Batallas(pokemon, tienda)
+        pokemon = equipo.pokemon_inicial
+        batalla = Batallas(pokemon, tienda)
+        batalla.batalla()
     elif opcion == 3:
         # En la clase Pokedex los atributos serán los links respectivos de cada pokemon  
         # En el método se verificará si los pokemon ya fueron enfrentados 
@@ -112,6 +114,7 @@ while True:
         print('************************************************************************')
         input('Presiona cualquier tecla para continuar...')
         print('\033[39m')
+        clear()
         break
     else:
         continue

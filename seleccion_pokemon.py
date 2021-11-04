@@ -7,8 +7,6 @@ class Seleccion_pokemon:
     def __init__(self, pokemon):
         self.pokemon = pokemon
         self.pokeinicial = {}
-    
-
 
     def inicial(self):
         nivel = 5
@@ -45,7 +43,10 @@ class Seleccion_pokemon:
             movimiento1 = movimiento1['move']['name']
             movimiento2 = choice(movimientos_bulbasaur)
             movimiento2 = movimiento2['move']['name']
-            tipos = pokemon['types']  
+            tipos = []
+            for i in pokemon['types']:
+                tipos.append(
+                    {'name': i['type']['name'], 'url': i['type']['url']})
 
             print('Su pokemon es: BULBASAUR')
             apodo = input('Ingrese apodo: ')
@@ -59,6 +60,8 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
+            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
 
         elif self.pokemon == 2:
             nombre = "Charmander"
@@ -93,7 +96,10 @@ class Seleccion_pokemon:
             movimiento1 = movimiento1['move']['name']
             movimiento2 = choice(movimientos_charmander)
             movimiento2 = movimiento2['move']['name']
-            tipos = pokemon['types']  
+            tipos = []
+            for i in pokemon['types']:
+                tipos.append(
+                    {'name': i['type']['name'], 'url': i['type']['url']})
 
             print('Su pokemon es: CHARMANDER')
             apodo = input('Ingrese apodo: ')
@@ -107,6 +113,8 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
+            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
 
         elif self.pokemon == 3:
             nombre = "Squirtle"
@@ -141,7 +149,10 @@ class Seleccion_pokemon:
             movimiento1 = movimiento1['move']['name']
             movimiento2 = choice(movimientos_squirtle)
             movimiento2 = movimiento2['move']['name']  
-            tipos = pokemon['types']          
+            tipos = []
+            for i in pokemon['types']:
+                tipos.append(
+                    {'name': i['type']['name'], 'url': i['type']['url']})
 
             print('Su pokemon es: SQUIRTLE')
             apodo = input('Ingrese apodo: ')
@@ -155,11 +166,12 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
+            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
+
         
         else:
             print('Esta opcion no esta disponible')
 
-        self.pokeinicial = {'nombre': nombre, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial, 'Defensa especial': def_especial, 'Velociadad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]} 
-    
-    def datosinicial(self):
         return self.pokeinicial
+    
