@@ -28,12 +28,12 @@ class Equipo:
         for x in visualizar['tipo']:
             print(x['name'], end=", ")
         print("")
-        print(f"Movimientos-----:", end=" ")
+        print(f"Movimientos-----:\n")
         for x in visualizar['movimientos']:
-            print(x, end=", ")
+            print(f"Nombre: {x['nombre']}, Tipo: {x['tipo']}, Categoria: {x['categoria']}, Potencia: {x['potencia']}, Presicion: {x['precision']}")
         print("")
         print(f"Experiencia ----: {visualizar['experiencia']}")
-        print('-------- DATOS DE COMBATE --------')
+        print('\n-------- DATOS DE COMBATE --------')
         print(f"Puntos de salud-: {visualizar['Salud']} ")
         print(f"Ataque----------: {visualizar['Ataque']}")
         print(f"Defensa---------: {visualizar['Defensa']}")
