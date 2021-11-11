@@ -40,9 +40,27 @@ class Seleccion_pokemon:
             # movimientos de BULBASAUR
             movimientos_bulbasaur = pokemon['moves']
             movimiento1 = choice(movimientos_bulbasaur)
-            movimiento1 = movimiento1['move']['name']
+            movimiento = requests.get(movimiento1['move']['url'])
+            movimiento = movimiento.json()
+            movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento1['potencia'] == None):
+                movimiento1 = choice(movimientos_bulbasaur)
+                movimiento = requests.get(movimiento1['move']['url'])
+                movimiento = movimiento.json()
+                movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
             movimiento2 = choice(movimientos_bulbasaur)
-            movimiento2 = movimiento2['move']['name']
+            movimiento = requests.get(movimiento2['move']['url'])
+            movimiento = movimiento.json()
+            movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento2['potencia'] == None):
+                movimiento2 = choice(movimientos_bulbasaur)
+                movimiento = requests.get(movimiento2['move']['url'])
+                movimiento = movimiento.json()
+                movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
             tipos = []
             for i in pokemon['types']:
                 tipos.append(
@@ -51,7 +69,12 @@ class Seleccion_pokemon:
             print('Su pokemon es: BULBASAUR')
             apodo = input('Ingrese apodo: ')
             print(f"Nivel-----------: {nivel} ")
-            print(f"Movimientos-----: {movimiento1}, {movimiento2}")
+            print(f"Tipos ----------:", end=" ")
+            for x in tipos:
+                print(x['name'], end=", ")
+            print("\n")
+            print(
+                f"Movimientos-----: {movimiento1['nombre']}, {movimiento2['nombre']}")
             print('Datos de combate. ')
             print(f"Puntos de salud-: {ps} ")
             print(f"Ataque----------: {atq}")
@@ -60,8 +83,8 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
-            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
-                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
+            self.pokeinicial = {'nombre': nombre, 'url': "https://pokeapi.co/api/v2/pokemon/1/", 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2], 'niveles_subidos': 0}
 
         elif self.pokemon == 2:
             nombre = "Charmander"
@@ -93,9 +116,27 @@ class Seleccion_pokemon:
             # movimientos de CHARMANDER
             movimientos_charmander = pokemon['moves']
             movimiento1 = choice(movimientos_charmander)
-            movimiento1 = movimiento1['move']['name']
+            movimiento = requests.get(movimiento1['move']['url'])
+            movimiento = movimiento.json()
+            movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento1['potencia'] == None):
+                movimiento1 = choice(movimientos_charmander)
+                movimiento = requests.get(movimiento1['move']['url'])
+                movimiento = movimiento.json()
+                movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
             movimiento2 = choice(movimientos_charmander)
-            movimiento2 = movimiento2['move']['name']
+            movimiento = requests.get(movimiento2['move']['url'])
+            movimiento = movimiento.json()
+            movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento2['potencia'] == None):
+                movimiento2 = choice(movimientos_charmander)
+                movimiento = requests.get(movimiento2['move']['url'])
+                movimiento = movimiento.json()
+                movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
             tipos = []
             for i in pokemon['types']:
                 tipos.append(
@@ -104,7 +145,12 @@ class Seleccion_pokemon:
             print('Su pokemon es: CHARMANDER')
             apodo = input('Ingrese apodo: ')
             print(f"Nivel-----------: {nivel} ")
-            print(f"Movimientos-----: {movimiento1}, {movimiento2}")
+            print(f"Tipos ----------:", end=" ")
+            for x in tipos:
+                print(x['name'], end=", ")
+            print("\n")
+            print(
+                f"Movimientos-----: {movimiento1['nombre']}, {movimiento2['nombre']}")
             print('Datos de combate. ')
             print(f"Puntos de salud-: {ps} ")
             print(f"Ataque----------: {atq}")
@@ -113,8 +159,8 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
-            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
-                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
+            self.pokeinicial = {'nombre': nombre, 'url': "https://pokeapi.co/api/v2/pokemon/4/", 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2], 'niveles_subidos': 0}
 
         elif self.pokemon == 3:
             nombre = "Squirtle"
@@ -146,9 +192,27 @@ class Seleccion_pokemon:
             # movimientos de SQUIRTLE
             movimientos_squirtle = pokemon['moves']
             movimiento1 = choice(movimientos_squirtle)
-            movimiento1 = movimiento1['move']['name']
+            movimiento = requests.get(movimiento1['move']['url'])
+            movimiento = movimiento.json()
+            movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento1['potencia'] == None):
+                movimiento1 = choice(movimientos_squirtle)
+                movimiento = requests.get(movimiento1['move']['url'])
+                movimiento = movimiento.json()
+                movimiento1 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
             movimiento2 = choice(movimientos_squirtle)
-            movimiento2 = movimiento2['move']['name']  
+            movimiento = requests.get(movimiento2['move']['url'])
+            movimiento = movimiento.json()
+            movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                           ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}
+            while(movimiento2['potencia'] == None):
+                movimiento2 = choice(movimientos_squirtle)
+                movimiento = requests.get(movimiento2['move']['url'])
+                movimiento = movimiento.json()
+                movimiento2 = {'nombre': movimiento['name'], 'tipo': movimiento['type']['name'], 'categoria': movimiento['meta']
+                               ['category']['name'], 'potencia': movimiento['power'], 'precision': movimiento['accuracy']}  
             tipos = []
             for i in pokemon['types']:
                 tipos.append(
@@ -157,7 +221,12 @@ class Seleccion_pokemon:
             print('Su pokemon es: SQUIRTLE')
             apodo = input('Ingrese apodo: ')
             print(f"Nivel-----------: {nivel} ")
-            print(f"Movimientos-----: {movimiento1}, {movimiento2}")
+            print(f"Tipos ----------:", end=" ")
+            for x in tipos:
+                print(x['name'], end=", ")
+            print("\n")
+            print(
+                f"Movimientos-----: {movimiento1['nombre']}, {movimiento2['nombre']}")
             print('Datos de combate. ')
             print(f"Puntos de salud-: {ps} ")
             print(f"Ataque----------: {atq}")
@@ -166,12 +235,8 @@ class Seleccion_pokemon:
             print(f"Defensa especial: {def_especial}")
             print(f"Velocidad-------: {velocidad}")
             input('Presione cualquier tecla para continuar...')
-            self.pokeinicial = {'nombre': nombre, 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
-                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2]}
-
-        
-        else:
-            print('Esta opcion no esta disponible')
+            self.pokeinicial = {'nombre': nombre, 'url': "https://pokeapi.co/api/v2/pokemon/7/", 'apodo': apodo, 'nivel': nivel, 'tipo': tipos, 'Salud': ps, 'Ataque': atq, 'Defensa': defe, 'Ataque especial': atq_especial,
+                                'Defensa especial': def_especial, 'Velocidad': velocidad, 'experiencia': pokemon['base_experience'], 'movimientos': [movimiento1, movimiento2], 'niveles_subidos': 0}
 
         return self.pokeinicial
     

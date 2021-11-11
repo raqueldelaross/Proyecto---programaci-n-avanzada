@@ -5,11 +5,13 @@ from batallas import Batallas
 from pokedex import Pokedex
 from tienda import Tienda
 
+
 def clear(): return os.system('cls')
+
+
 tienda = Tienda()
 
 # Bloque principal:
-clear()
 while(1):
     print('\nBIENVENIDO A POKEMON ROJO. ')
     print('INICIO DE JUEGO... ')
@@ -27,14 +29,16 @@ while(1):
 clear()
 
 # Asigna dentro de una variable la clase Pokemon_inicial 
+
 seleccion = Seleccion_pokemon(poke_inicial)
 primer = seleccion.inicial()
 clear()
 equipo = Equipo(primer)
-print(equipo)
+pokedex = Pokedex(primer)
 
 while True:
     # Menú de interacción
+    clear()
     print('Bienvenido al juego de Pokémon')
     print('------------------------------')
     print('1. Equipo pokémon')
@@ -44,7 +48,7 @@ while True:
     print('5. Salir del videojuego')
     # seleccionar una opción del menú 
     opcion = int(input('Seleccione una opción para continuar: '))
-
+    clear()
     if opcion == 1:
         equipo.progreso()
     elif opcion == 2: 
@@ -53,13 +57,12 @@ while True:
         # Batallas(“Link para el pokemon mencionado”)
         pokemon = equipo.pokemon_inicial
         batalla = Batallas(pokemon, tienda)
-        batalla.batalla()
+        nuevo, captura, seleccionado = batalla.batalla()
+        pokedex.nuevo(nuevo, captura)
+        if(captura == True):
+            equipo.nuevo_pokemon(nuevo)
     elif opcion == 3:
-        # En la clase Pokedex los atributos serán los links respectivos de cada pokemon  
-        # En el método se verificará si los pokemon ya fueron enfrentados 
-        # Si ya fueron enfrentados entonces los mostrara en pantalla 
-        # De lo contrario no los mostrara
-        Pokedex('link1, link2...... link5')
+        pokedex.mostrar()
     elif opcion == 4:
         clear()
         # menu
@@ -70,27 +73,33 @@ while True:
         opcion = int(input('Ingrese la opción a la que desea acceder: '))
         if opcion == 1:
             clear()
-            print('OBBJETOS CURATIVOS')
+            print(f"Monedas Disponibles: {tienda.monedas}")
+            print('OBJETOS CURATIVOS')
             print('   Nombre:        Puntos de Salud:     Valor:')
             print('1. Posión                20             300')
             print('2. Super-posión          50             700')
             print('3. Hiper-posión         200            1200')
             print('4. Restaurar      (vida completa)      3000')
-            compra1 = int(input('Ingrese el número de opción del objeto que desea comprar: '))
-            cantidad = int(input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
+            compra1 = int(
+                input('Ingrese el número de opción del objeto que desea comprar: '))
+            cantidad = int(
+                input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
             tienda.objetos_curativos(compra1, cantidad)
             os.system('pause')
 
         elif opcion == 2:
             clear()
+            print(f"Monedas Disponibles: {tienda.monedas}")
             print('POKÉ-BALLS')
             print('   Nombre:     Proporción de captura:     Valor:')
             print('1. Pokéball                 1               200')
             print('2. Super-ball               1.5             600')
             print('3. Ultra-ball               2              1200')
             print('4. Master-ball            255            100000')
-            compra1 = int(input('Ingrese el número de opción de la pokéball que desea comprar: '))
-            cantidad = int(input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
+            compra1 = int(
+                input('Ingrese el número de opción de la pokéball que desea comprar: '))
+            cantidad = int(
+                input('Ingrese la cantidad de objetos seleccionados que desea adquirir: '))
             tienda.poke(compra1, cantidad)
             os.system('pause')
 

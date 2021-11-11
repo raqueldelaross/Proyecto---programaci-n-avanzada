@@ -45,4 +45,4 @@ class Equipo:
 
     def nuevo_pokemon(self, pokemon):
         self.listapokemon.append(pokemon)
-        print(self.listapokemon)
+        

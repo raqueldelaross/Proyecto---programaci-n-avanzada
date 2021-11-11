@@ -1,5 +1,7 @@
 import os
-clear = lambda: os.system('cls')
+def clear(): return os.system('cls')
+
+
 class Tienda: 
     def __init__(self):
         self.posion = 0
@@ -12,7 +14,6 @@ class Tienda:
         self.ultraball = 0
         self.masterball = 0
         
-
     def objetos_curativos(self, compra1, cantidad):
         if compra1 == 1:
             if cantidad * 300 > self.monedas:
@@ -93,3 +94,27 @@ class Tienda:
         print(f"Super-ball:   {self.superpokeball}")
         print(f"Ultra-ball:   {self.ultraball}")
         print(f"Master-ball:  {self.masterball}")
+
+    def usar_poke(self, tipo):
+        if tipo == 1:
+            self.pokeball = self.pokeball - 1
+        elif tipo == 2:
+            self.superpokeball = self.superpokeball - 1
+        elif tipo == 3:
+            self.ultraball = self.ultraball - 1
+        elif tipo == 4:
+            self.masterball = self.masterball - 1
+        else:
+            pass
+
+    def usar_cura(self, tipo):
+        if tipo == 1:
+            self.posion = self.posion - 1
+        elif tipo == 2:
+            self.superposion = self.superposion - 1
+        elif tipo == 3:
+            self.hiperposion = self.hiperposion - 1
+        elif tipo == 4:
+            self.restaurar = self.restaurar - 1
+        else:
+            pass
