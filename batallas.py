@@ -104,6 +104,7 @@ class Batallas:
 
     def atacar(self, ataque):
         at = ataque
+        # tipo = requests.get(f"https://pokeapi.co/api/v2/pokemon/{}/")
         if(self.turno == 'salvaje'):
             salvajetipos = []
             for x in self.pokesalvaje['tipo']:
